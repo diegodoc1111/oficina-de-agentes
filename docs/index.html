@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arma tu oficina de agentes de IA, como mi Ecomoda (guía gratis)</title>
+<meta name="description" content="Cómo crear tus agentes con nombre, personaje y oficio en Grok Bot, y el tablero tipo videojuego en GitHub Pages para verlos trabajar.">
+<meta property="og:title" content="Mi oficina solo tiene empleados digitales">
+<meta property="og:description" content="Arma tu propia Ecomoda de agentes. Gratis, en español.">
+<meta property="og:image" content="https://diegodoc1111.github.io/oficina-de-agentes/img/og.jpg">
+<meta property="og:url" content="https://diegodoc1111.github.io/oficina-de-agentes/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #EEE8DB; --tinta: #1F1D1A; --texto: #3A3733; --suave: #6E6A63;
+    --terra: #D9774F; --terra-osc: #B85C37; --rosa: #F6DED5; --carta: #FBF8F2; --linea: #E0D8C8; --term: #1E1C1A;
+    --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 17px/1.6 var(--sans); }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 22px 64px; }
+  .cabeza { display: flex; align-items: flex-end; gap: 18px; margin: 8px 0 18px; }
+  .cabeza img { width: 92px; height: auto; image-rendering: pixelated; flex: none; }
+  .etiqueta { display: inline-block; font: 600 13px/1 var(--mono); letter-spacing: .08em; color: var(--terra-osc); background: var(--rosa); padding: 8px 12px; border-radius: 999px; }
+  h1 { font: 400 clamp(40px, 8.5vw, 62px)/1.02 var(--serif); color: var(--tinta); margin: 14px 0 14px; letter-spacing: -.01em; }
+  h1 em, h2 em { color: var(--terra); }
+  .bajada { font-size: 19px; margin: 0 0 22px; } .bajada strong { color: var(--tinta); }
+  .foto { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--linea); box-shadow: 0 10px 30px rgba(30,20,15,.18); margin: 0 0 10px; }
+  .pie { font-size: 14px; color: var(--suave); margin: 0 0 24px; }
+  .avisos { display: grid; gap: 10px; margin: 0 0 34px; padding: 0; list-style: none; }
+  .avisos li { background: var(--carta); border: 1px solid var(--linea); border-radius: 14px; padding: 12px 16px; font-size: 15.5px; }
+  .avisos li b { color: var(--tinta); }
+  .paso { position: relative; margin: 0 0 30px; padding: 22px 20px 20px; background: var(--carta); border: 1px solid var(--linea); border-radius: 20px; }
+  .num { position: absolute; top: -16px; left: 18px; width: 36px; height: 36px; border-radius: 50%; background: var(--terra); color: #fff; font: 700 17px/36px var(--sans); text-align: center; box-shadow: 0 2px 0 var(--terra-osc); }
+  h2 { font: 400 30px/1.15 var(--serif); color: var(--tinta); margin: 8px 0 10px; }
+  h3 { font: 700 16px/1.3 var(--sans); color: var(--tinta); margin: 18px 0 6px; }
+  .paso p { margin: 0 0 12px; } .paso p:last-child { margin-bottom: 0; }
+  .paso ol, .paso ul { margin: 0 0 12px; padding-left: 22px; } .paso li { margin: 5px 0; }
+  a { color: var(--terra-osc); text-underline-offset: 3px; }
+  .boton { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0 12px; padding: 16px 20px; border-radius: 999px; background: var(--terra); color: #fff; text-decoration: none; font: 700 18px/1.2 var(--sans); box-shadow: 0 3px 0 var(--terra-osc); border: 0; width: 100%; cursor: pointer; }
+  .boton:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--terra-osc); }
+  .nota { font-size: 14.5px; color: var(--suave); }
+  .term { background: var(--term); border-radius: 14px; overflow: hidden; margin: 12px 0 0; box-shadow: 0 6px 20px rgba(30,20,15,.22); }
+  .term .barra { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #2A2724; font: 12.5px var(--mono); color: #9E978C; }
+  .term .barra i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; } .term .barra span { margin-left: 8px; }
+  .term pre { margin: 0; padding: 14px 16px 16px; overflow-x: auto; font: 14px/1.7 var(--mono); color: #E8E2D6; white-space: pre-wrap; word-break: break-word; }
+  .term.largo pre { max-height: 420px; overflow-y: auto; }
+  .term .p { color: var(--terra); }
+  .term .ag { color: var(--terra); font-weight: 600; }
+  .sis { display: inline-block; font: 600 12px/1 var(--mono); letter-spacing: .06em; color: var(--terra-osc); background: var(--rosa); padding: 6px 10px; border-radius: 999px; margin: 14px 0 0; }
+  .copiar { margin-top: 10px; display: inline-flex; gap: 8px; align-items: center; cursor: pointer; border: 1px solid var(--linea); background: #fff; color: var(--tinta); border-radius: 999px; padding: 8px 14px; font: 600 14px var(--sans); }
+  .acciones { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 4px; }
+  .acciones a { font: 600 14px var(--sans); }
+  .rondas { display: grid; gap: 10px; margin: 12px 0 0; }
+  .ronda { display: flex; gap: 14px; background: #fff; border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; }
+  .ronda .n { flex: none; font-size: 26px; line-height: 1.1; width: 32px; }
+  .ronda b { color: var(--tinta); }
+  .seccion { margin: 44px 0 0; } .seccion h2 { font-size: 32px; }
+  details { background: var(--carta); border: 1px solid var(--linea); border-radius: 14px; padding: 14px 16px; margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 700; color: var(--tinta); } details p { margin: 10px 0 0; }
+  code { font: 14px var(--mono); background: #fff; border: 1px solid var(--linea); border-radius: 6px; padding: 1px 6px; }
+  .loop { display: block; background: var(--rosa); border: 1px solid #EBC3B3; border-left: 6px solid var(--terra); border-radius: 14px;
+          padding: 14px 16px; margin: 0 0 30px; font-size: 16px; color: var(--tinta); text-decoration: none; }
+  .loop b { color: var(--terra-osc); } .loop span { display: block; margin-top: 6px; font-weight: 700; color: var(--terra-osc); }
+  .imperio { margin: 48px 0 0; padding: 26px 22px 24px; border-radius: 22px; background: var(--tinta); color: #E8E2D6; }
+  .imperio h2 { color: #fff; font-size: 34px; margin-top: 0; } .imperio h2 em { color: var(--terra); }
+  .imperio p { margin: 0 0 14px; } .imperio b { color: #fff; }
+  .imperio ul { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 8px; }
+  .imperio li { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 10px 14px; }
+  .imperio .cifra { font: 400 26px/1.25 var(--serif); color: #fff; margin: 6px 0 16px; }
+  .imperio .cifra em { color: var(--terra); }
+  .imperio .boton { margin-bottom: 8px; } .imperio .nota { color: #B9B2A6; }
+  footer { margin-top: 52px; padding-top: 22px; border-top: 1px solid var(--linea); font-size: 15px; color: var(--suave); }
+  footer a { color: var(--tinta); font-weight: 700; text-decoration: none; } footer em { font-family: var(--serif); font-size: 19px; color: var(--terra); }
+
+  .paso .foto { margin: 14px 0 6px; }
+  .num.osc { background: var(--tinta); box-shadow: 0 2px 0 #000; }
+  .mania { display: block; font: 600 12.5px/1.2 var(--mono); letter-spacing: .06em; color: var(--suave); text-transform: uppercase; margin: 6px 0 0; }
+  .paso h2 + .mania { margin-top: -4px; }
+  .ronda code { font-size: 13px; }
+  ol.simple { margin: 0 0 12px; padding-left: 22px; } ol.simple li { margin: 6px 0; }
+  .once { gap: 6px; } .once .ronda { padding: 8px 12px; gap: 10px; font-size: 15px; line-height: 1.45; }
+  .once .ronda .n { font-size: 17px; width: 22px; line-height: 1.5; color: var(--terra-osc); font-weight: 700; }
+</style>
+<style>
+  .forma { margin: 0 0 22px; padding: 18px 18px 16px; background: #fff; border: 1px solid var(--linea); border-radius: 18px; }
+  .forma h3 { margin: 0 0 6px; font: 400 26px/1.15 var(--serif); color: var(--tinta); }
+  .forma h3 b { font: 700 14px/1 var(--mono); color: #fff; background: var(--terra); border-radius: 999px; padding: 5px 10px; margin-right: 8px; vertical-align: 4px; }
+  .forma p { margin: 0 0 10px; }
+  .chip { display: inline-block; font: 600 12px/1 var(--mono); letter-spacing: .04em; color: var(--tinta); background: #fff; border: 1px solid var(--linea); border-radius: 999px; padding: 6px 10px; margin: 4px 6px 0 0; }
+  .tabla { width: 100%; border-collapse: collapse; margin: 10px 0 0; font-size: 15px; background: #fff; border-radius: 12px; overflow: hidden; }
+  .tabla td { border-top: 1px solid var(--linea); padding: 9px 12px; vertical-align: top; } .tabla tr:first-child td { border-top: 0; }
+  .tabla td:first-child { font: 600 14px var(--mono); color: var(--terra-osc); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="cabeza">
+    <img src="img/mascota-regalo.png" alt="">
+    <span class="etiqueta">GRATIS · EN ESPAÑOL</span>
+  </div>
+
+  <h1>Arma tu oficina de <em>agentes</em></h1>
+  <p class="bajada">Mi oficina se llama <strong>Ecomoda</strong> y solo tiene empleados digitales: Betty maneja los anuncios, don Armando escribe los guiones, Patricia edita los videos y Freddy me recuerda lo que no quiero hacer. <strong>Así la armé con Grok Bot.</strong></p>
+
+  <img class="foto" src="img/hero.jpg" alt="Ecomoda trabaja para mí: el tablero de mis agentes en el portátil">
+  <p class="pie">Al darles nombre y personaje, se te olvida que estás hablando con máquinas.</p>
+
+  <a class="loop" href="#imperio">🚀 <b>Los agentes de IA con los que hago cosas como esta les están sumando entre 5.000 y 10.000 dólares al mes a los clientes con los que trabajo.</b> Están dentro de Imperio, para multiplicar las ventas de los negocios.<span>Al final te cuento cómo funciona ↓</span></a>
+
+  <ul class="avisos">
+    <li>🤖 <b>Usé Grok Bot:</b> creó los agentes y publicó el tablero en una página de GitHub. Viene en planes como SuperGrok o Cursor Pro.</li>
+    <li>🆓 <b>GitHub es gratis:</b> solo necesitas una cuenta.</li>
+    <li>⏱️ <b>La primera versión sale en una tarde.</b> Después la vas mejorando.</li>
+  </ul>
+
+  <section class="paso">
+    <div class="num">1</div>
+    <h2>Activa <em>Grok Bot</em></h2>
+    <p>Entra con tu cuenta, elige un plan que lo incluya y descarga la app. Si es tu primera vez, aquí te explico cómo crear tu primer agente:</p>
+    <a class="boton" href="https://diegodoc1111.github.io/agente-grok-bot/" target="_blank" rel="noopener">Ver la guía de Grok Bot →</a>
+  </section>
+
+  <section class="paso">
+    <div class="num">2</div>
+    <h2>Elige tu <em>elenco</em></h2>
+    <p>Usa los personajes de tu novela favorita y reparte los oficios por departamento. Este es el mío:</p>
+    <table class="tabla">
+      <tr><td>Tráfico</td><td><b>Betty</b> · líder de tráfico, maneja las cuentas de anuncios de mis clientes</td></tr>
+      <tr><td>Dirección</td><td><b>Don Roberto Mendoza</b> · revisa que todo avance</td></tr>
+      <tr><td>Contenido</td><td><b>Don Armando</b> · ideas y guiones · <b>Hugo Lombardi</b> · historietas · <b>Aura María</b> · recursos de ManyChat</td></tr>
+      <tr><td>Videos</td><td><b>Marcela Valencia</b> · anuncios animados · <b>Patricia</b> · edita y publica · <b>Wilson</b> · descarga videos</td></tr>
+      <tr><td>Agenda</td><td><b>Freddy</b> · motivación, hábitos y recordatorios</td></tr>
+    </table>
+    <img class="foto" src="img/contenido.jpg" alt="El departamento de contenido: don Armando y Hugo Lombardi">
+  </section>
+
+  <section class="paso">
+    <div class="num">3</div>
+    <h2>Crea a <em>cada agente</em></h2>
+    <p>En el chat de Grok Bot, uno por uno. Así creé a Betty; cambia el nombre y el oficio para los demás:</p>
+    <div class="term"><div class="barra"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>Claude Code</span></div><pre id="of1">Crea un agente llamado Betty. Es mi líder de tráfico: cada mañana revisa las cuentas de anuncios de mis clientes en Meta, me dice qué campaña va bien y cuál hay que apagar, y me manda un resumen corto. Habla como Betty: amable, ordenada y muy detallista. Pregúntame lo que necesites antes de empezar.</pre></div><button class="copiar" type="button" data-copiar-de="of1">📋 Copiar</button>
+    <img class="foto" src="img/betty.jpg" alt="Betty, mi líder de tráfico, en su escritorio" style="max-width:300px">
+  </section>
+
+  <section class="paso">
+    <div class="num">4</div>
+    <h2>Pídele <em>el tablero</em></h2>
+    <p>Primero crea tu cuenta gratis en GitHub y entra con ella en el computador de Grok Bot. Luego pégale esto:</p>
+    <a class="boton" href="https://github.com/signup" target="_blank" rel="noopener">Crear mi cuenta de GitHub →</a>
+    <div class="term"><div class="barra"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>Claude Code</span></div><pre id="of2">Crea una página en GitHub Pages que sea el tablero de mi oficina de agentes, estilo videojuego pixel: una sala por departamento, cada agente en su escritorio con su nombre y su oficio, y arriba cuántos están trabajando. Cuando un agente empiece o termine una tarea, actualiza la página. Usa mi cuenta de GitHub, que ya está abierta en tu computador, y al final dame el link.</pre></div><button class="copiar" type="button" data-copiar-de="of2">📋 Copiar</button>
+    <img class="foto" src="img/tablero.jpg" alt="Mi tablero tipo videojuego con todos los departamentos">
+    <p class="nota">Ojo: las páginas gratis de GitHub las puede ver cualquiera que tenga el link. Pon solo nombres de agentes y tareas, nunca datos de tus clientes ni contraseñas.</p>
+  </section>
+
+  <section class="paso">
+    <div class="num">5</div>
+    <h2>Habla con <em>cada uno</em></h2>
+    <p>Cada agente tiene su propio chat. Dales órdenes como a un equipo: <i>"Don Armando, ¿cuáles son los 5 guiones de hoy?"</i>. Cada día aprenden y lo hacen más a tu manera.</p>
+    <img class="foto" src="img/chats.jpg" alt="Un chat por cada agente">
+    <img class="foto" src="img/equipo.jpg" alt="Mi equipo: Betty, don Armando, Patricia y Freddy">
+  </section>
+
+  <section class="seccion">
+    <h2>Preguntas <em>frecuentes</em></h2>
+    <details>
+      <summary>¿Cuánto cuesta?</summary>
+      <p>GitHub es gratis. Grok Bot viene en su plan (SuperGrok, unos 30 dólares al mes, o Cursor Pro, unos 20).</p>
+    </details>
+    <details>
+      <summary>¿Y si uso Claude en vez de Grok Bot?</summary>
+      <p>También sirve: Claude Code te arma el mismo tablero y lo publica en GitHub Pages con el mismo mensaje del paso 4.</p>
+    </details>
+    <details>
+      <summary>¿Cuántos agentes debería tener?</summary>
+      <p>Empieza con 3: los tres procesos que más tiempo te quitan. Después creas nuevos personajes para delegar tareas nuevas.</p>
+    </details>
+  </section>
+
+
+  <section class="imperio" id="imperio">
+    <h2>Deja de hacerlo todo <em>a mano</em></h2>
+    <p class="cifra">Haz en <em>3 días</em> el trabajo de todo un mes.</p>
+    <p>Ten un equipo de marketing de 4 personas trabajando para ti por unos <b>$25 al mes</b>: <b>los agentes Imperio</b>. Te hacen:</p>
+    <ul>
+      <li>✍️ El contenido y los carruseles.</li>
+      <li>📣 Los anuncios y los VSL.</li>
+      <li>🖥️ Las páginas web.</li>
+      <li>📊 Las campañas en Meta.</li>
+      <li>💬 Y hasta responden tus mensajes.</li>
+    </ul>
+    <p><b>Sin saber de tecnología: solo copias, pegas y facturas.</b></p>
+    <p>Son los mismos agentes que hoy les suman <b>entre $5.000 y $10.000 dólares extra al mes</b> a los negocios con los que trabajo: automatizan todo el marketing y hacen el trabajo de 4 personas.</p>
+    <a class="boton" href="https://ig.me/m/soydiegoosorio" target="_blank" rel="noopener">Escríbeme “IMPERIO” por Instagram →</a>
+    <p class="nota">Te cuento cómo funciona y si encaja con tu negocio.</p>
+  </section>
+
+
+  <footer>
+    <p>Guía de <a href="https://instagram.com/soydiegoosorio">@soydiegoosorio</a>. Esta guía también está en <a href="https://github.com/diegodoc1111/oficina-de-agentes">GitHub</a>.</p>
+    <p><em>Úsalo y compártelo.</em></p>
+  </footer>
+
+</main>
+<script>
+  function copiarTexto(t, boton) {
+    var listo = function () { var o = boton.textContent; boton.textContent = "✅ Copiado"; setTimeout(function () { boton.textContent = o; }, 1800); };
+    var respaldo = function () {
+      var a = document.createElement("textarea"); a.value = t; a.setAttribute("readonly", "");
+      a.style.position = "fixed"; a.style.top = "-1000px"; document.body.appendChild(a); a.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(a);
+      if (ok) { listo(); } else { boton.textContent = "Mantén presionado el texto para copiarlo"; }
+    };
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t).then(listo, respaldo); } else { respaldo(); }
+  }
+  document.querySelectorAll("[data-copiar-de]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.getAttribute("data-copiar-de"));
+      var t = el.innerText.replace(/^❯\s*/, "");
+      copiarTexto(t, b);
+    });
+  });
+</script>
+
+</body>
+</html>
